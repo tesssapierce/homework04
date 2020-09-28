@@ -14,11 +14,10 @@
 // Restart option
 
 //Declare variables
-
 var start = document.getElementById("start");
 var quizBody = document.body.querySelector(".modal");
 var counter = 60;
-var displayCount = document.getElementById("count");
+var displayCount = document.querySelector(".countdown");
 
 //Start Timer and unhide quiz
 function startQuiz(e){
@@ -27,17 +26,19 @@ function startQuiz(e){
   startCountdown();
 }
 
+//Timer
 function startCountdown(){
   var countdown = setInterval(function(){
     counter--;
+
+    //Display text on webpage
+    displayCount.textContent = counter + " seconds left"
 
     if (counter === 0) {
       clearInterval(countdown);
     }
   }, 1000)
 
-  //Display text on webpage
-  displayCount.textContent = counter;
 }
 
 start.addEventListener("click", startQuiz);
