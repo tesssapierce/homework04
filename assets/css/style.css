@@ -5,3 +5,7 @@ div.hide {
 body {
   background-color: aquamarine;
 }
+
+ul.answers {
+  list-style-type: none;
+}
