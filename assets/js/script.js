@@ -34,6 +34,7 @@ function startQuiz(e){
   quizBody.style.display = "block"
   startCountdown();
   populateQA();
+  start.style.display = "none";
 }
 
 //Timer
@@ -57,7 +58,7 @@ function populateQA(){
   answer1.textContent = quiz[0].choices[0]
   ulTag.appendChild(answer1)
 
-  
+
 }
 
 
