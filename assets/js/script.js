@@ -1,18 +1,5 @@
 
 
-// User is given a landing page
-    //User clicks "Start Quiz"
-// User is prompted with the first question
-// Timer starts
-    // User Answers correctly
-      //Next Question
-    //User answers incorrectly
-      //10 seconds off, next question
-
-// Timer runs out OR question are answered, display results
-// User can enter initials to save score
-// Restart option
-
 //Declare variables
 var start = document.getElementById("startButton");
 var quizBody = document.body.querySelector(".hide");
@@ -22,6 +9,7 @@ var questionDisplay = document.querySelector(".question");
 var ulTag = document.querySelector(".answers");
 var idx = 0;
 var button = document.querySelectorAll(".button")
+var score = 0;
 
 // var idx = 0;
 var letter = ["A", "B", "C", "D"];
@@ -31,7 +19,7 @@ var quiz = [
   {
     question: "The # symbol specifies that the selector is...", 
     choices: ["Class", "Number", "Tag", "ID"], 
-    answer: "."
+    answer: "Tag"
   },{
     question: "Where is the correct place to put the title tag in an HTML document?", 
     choices: ["Above the HTML tag", "In the body of the document", "In the head of the document", "It doesn't matter"], 
@@ -90,12 +78,28 @@ function populateQA(idx){
     ulTag.appendChild(answer);
     }
   }
-  button.addEventListener("click", logIt);
+  button.addEventListener("click", function checkAnswer(){
+    var userAnswer = button.nextElementSibling.textContent;
+    if(quiz[idx].answer = userAnswer){
+      Score++
+    } else {
+      //TODO: Reduce 10 seconds
+    }
+  } ) //TODO: How the does it cycle between questions
 }
 
-function logIt(){
-  console.log("click");
-}
+//TODO: Create a high score page and save user score and initials to local storage
+
+//TODO: Create a progress bar for how far along the quiz they are and current score
+
+//TODO: If they get a question right, display "correct!", if they get a question wrong, display "incorrect, minus 10 seconds"
+
+//TODO: Make it pretty
+
+// for console logging
+// function logIt(){
+//   console.log("click");
+// }
 
 //Starts everything by clicking "Start Quiz"
 start.addEventListener("click", startQuiz);
