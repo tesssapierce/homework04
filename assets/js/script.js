@@ -14,16 +14,26 @@
 // Restart option
 
 //Declare variables
-var start = document.getElementById("start");
-var quizBody = document.body.querySelector(".modal");
+var start = document.getElementById("startButton");
+var quizBody = document.body.querySelector(".hide");
 var counter = 60;
 var displayCount = document.querySelector(".countdown");
+var questionDisplay = document.querySelector(".question");
+var ulTag = document.querySelector(".answers");
+
+var quiz = [
+  {question: "This is the first question", choices: [
+    "this is the first answer", "this is the second answer", "this is the third answer", "this is the fourth answer"], answer: "this is the correct answer"},
+  {question: "This is the second question", choices: [
+    "this is the first answer", "this is the second answer", "this is the third answer", "this is the fourth answer"], answer: "this is the correct answer"}
+  ]
 
 //Start Timer and unhide quiz
 function startQuiz(e){
   e.preventDefault();
-  quizBody.style.display = "block";
+  quizBody.style.display = "block"
   startCountdown();
+  populateQA();
 }
 
 //Timer
@@ -38,7 +48,17 @@ function startCountdown(){
       clearInterval(countdown);
     }
   }, 1000)
-
 }
+
+//Questions and Answers populating
+function populateQA(){
+  questionDisplay.textContent = "Question: " + quiz[0].question;
+  var answer1 = document.createElement("li");
+  answer1.textContent = quiz[0].choices[0]
+  ulTag.appendChild(answer1)
+
+  
+}
+
 
 start.addEventListener("click", startQuiz);
