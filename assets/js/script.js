@@ -20,6 +20,7 @@ var counter = 60;
 var displayCount = document.querySelector(".countdown");
 var questionDisplay = document.querySelector(".question");
 var ulTag = document.querySelector(".answers");
+var idx = 0;
 
 var quiz = [
   {question: "This is the first question", choices: [
@@ -33,7 +34,7 @@ function startQuiz(e){
   e.preventDefault();
   quizBody.style.display = "block"
   startCountdown();
-  populateQA();
+  populateQA(idx);
   start.style.display = "none";
 }
 
@@ -52,14 +53,13 @@ function startCountdown(){
 }
 
 //Questions and Answers populating
-function populateQA(){
-  questionDisplay.textContent = "Question: " + quiz[0].question;
+function populateQA(idx){
+  for (var i=0; i < quiz[idx].choices.length; i++){
+  questionDisplay.textContent = "Question: " + quiz[idx].question;
   var answer1 = document.createElement("li");
-  answer1.textContent = quiz[0].choices[0]
-  ulTag.appendChild(answer1)
-
-
+  answer1.textContent = quiz[idx].choices[i]
+  ulTag.appendChild(answer1)}
 }
 
-
+//Starts everything by clicking "Start Quiz"
 start.addEventListener("click", startQuiz);
