@@ -37,7 +37,7 @@ function startQuiz(e){
   e.preventDefault();
   quizBody.style.display = "block"
   startCountdown();
-  populateQA(idx);
+  populateQuestion();
   start.style.display = "none";
 }
 
@@ -55,41 +55,45 @@ function startCountdown(){
   }, 1000)
 }
 
-//Questions and Answers populating
-function populateQA(idx){
-  //Question display
+function populateQuestion(){
   questionDisplay.textContent = "Question: " + quiz[idx].question;
-    for (var i=0; i < quiz[idx].choices.length; i++){
-      //Answer display
-      var newButton = document.createElement("button");
-      newButton.textContent = letter[i]
-      ulTag.appendChild(newButton);
-      newButton.setAttribute("class", "button" );
-      newButton.setAttribute("data-answer", quiz[idx].choices[i])
-      var answer = document.createElement("li");
-      answer.textContent = quiz[idx].choices[i];
-      ulTag.appendChild(answer);
-    }
+  populateChoices(idx);
 }
 
-//Populates the
+//Choices populating
+function populateChoices(idx){
+  for (var i=0; i < quiz[idx].choices.length; i++){
+    if(ulTag.childElementCount < quiz[idx].choices.length){
+    var newButton = document.createElement("button");
+    ulTag.appendChild(newButton);
+    newButton.textContent = letter[i] + " " + quiz[idx].choices[i];
+    newButton.setAttribute("class", "button" + [i]);
+    newButton.setAttribute("data-answer", quiz[idx].choices[i]);
+    } else {
+    var existingButton = document.querySelector(".button" + [i]);
+    existingButton.textContent = letter[i] + " " + quiz[idx].choices[i];
+    existingButton.setAttribute("data-answer", quiz[idx].choices[i]);
+    }
+  }
+}
+
+//Checks the users answer
 function checkAnswer(e){
   e.preventDefault();
   var userAnswer = e.target.getAttribute("data-answer");
   console.log(userAnswer);
   console.log(quiz[idx].answer)
-  if(quiz[idx].answer === userAnswer){
+  if(quiz[idx].answer == userAnswer){
     message.textContent = "Correct!";
     score++;
-    idx++;
-    return
  } else {
     message.textContent = "Incorrect!";
     counter -= 5;
-    idx++;
-    return
   }
-  populateQA();
+  if(userAnswer){
+    idx++;
+    populateQuestion();
+  }
 }
 
 //TODO: Create a high score page and save user score and initials to local storage
@@ -105,3 +109,9 @@ start.addEventListener("click", startQuiz);
 
 //Checks the answers when a user clicks an answer
 ulTag.addEventListener("click", checkAnswer)
+
+
+    //If we want to have an LI tag AND a button, we can use this:
+    // var answer = document.createElement("li");
+    // answer.textContent = quiz[idx].choices[i];
+    // ulTag.appendChild(answer);
