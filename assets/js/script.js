@@ -9,7 +9,9 @@ var idx = 0;
 var button = document.querySelector(".button")
 var score = 0;
 var message = document.querySelector(".message")
-
+var progress = document.querySelector(".score-tracker")
+var displayResultsName = document.querySelector("#name")
+var displayResultsScore = document.querySelector("#score")
 var letter = ["A", "B", "C", "D"];
 
 var quiz = [
@@ -92,15 +94,18 @@ function checkAnswer(e){
   }
   if(userAnswer){
     idx++;
+    progress.textContent = "Current score: " + score;
     populateQuestion();
   }
 }
 
+function score(){
+  displayResultsScore.textContent = score;
+  displayResultsName.textContent = userName;
+  //Create var = userName and set it to whatever the user puts in the form, form will be in HTML
+}
+
 //TODO: Create a high score page and save user score and initials to local storage
-
-//TODO: Create a progress bar for how far along the quiz they are and current score
-
-//TODO: If they get a question right, display "correct!", if they get a question wrong, display "incorrect, minus 10 seconds"
 
 //TODO: Make it pretty
 
