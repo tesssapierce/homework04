@@ -1,4 +1,4 @@
-div.hide {
+div.quiz {
   display: none;  
 }
 
@@ -8,4 +8,8 @@ body {
 
 ul.answers {
   list-style-type: none;
+}
+
+div.results {
+  display: none;
 }

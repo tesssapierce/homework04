@@ -1,25 +1,22 @@
-
-
 //Declare variables
 var start = document.getElementById("startButton");
-var quizBody = document.body.querySelector(".hide");
+var quizBody = document.body.querySelector(".quiz");
 var counter = 60;
 var displayCount = document.querySelector(".countdown");
 var questionDisplay = document.querySelector(".question");
 var ulTag = document.querySelector(".answers");
 var idx = 0;
-var button = document.querySelectorAll(".button")
+var button = document.querySelector(".button")
 var score = 0;
+var message = document.querySelector(".message")
 
-// var idx = 0;
 var letter = ["A", "B", "C", "D"];
-console.log(letter[0])
 
 var quiz = [
   {
     question: "The # symbol specifies that the selector is...", 
     choices: ["Class", "Number", "Tag", "ID"], 
-    answer: "Tag"
+    answer: "ID"
   },{
     question: "Where is the correct place to put the title tag in an HTML document?", 
     choices: ["Above the HTML tag", "In the body of the document", "In the head of the document", "It doesn't matter"], 
@@ -34,8 +31,6 @@ var quiz = [
     answer: "Cascading Style Sheets"
   }
 ];
-
-  console.log(quiz.length)
 
 //Start Timer and unhide quiz
 function startQuiz(e){
@@ -62,30 +57,39 @@ function startCountdown(){
 
 //Questions and Answers populating
 function populateQA(idx){
-  for (var i=0; i<quiz.length; i++){
+  //Question display
+  questionDisplay.textContent = "Question: " + quiz[idx].question;
     for (var i=0; i < quiz[idx].choices.length; i++){
-    
-    //Question display
-    questionDisplay.textContent = "Question: " + quiz[idx].question;
+      //Answer display
+      var newButton = document.createElement("button");
+      newButton.textContent = letter[i]
+      ulTag.appendChild(newButton);
+      newButton.setAttribute("class", "button" );
+      newButton.setAttribute("data-answer", quiz[idx].choices[i])
+      var answer = document.createElement("li");
+      answer.textContent = quiz[idx].choices[i];
+      ulTag.appendChild(answer);
+    }
+}
 
-    //Answer display
-    var button = document.createElement("button");
-    button.textContent = letter[i]
-    ulTag.appendChild(button);
-    button.setAttribute("class", "button");
-    var answer = document.createElement("li");
-    answer.textContent = quiz[idx].choices[i];
-    ulTag.appendChild(answer);
-    }
+//Populates the
+function checkAnswer(e){
+  e.preventDefault();
+  var userAnswer = e.target.getAttribute("data-answer");
+  console.log(userAnswer);
+  console.log(quiz[idx].answer)
+  if(quiz[idx].answer === userAnswer){
+    message.textContent = "Correct!";
+    score++;
+    idx++;
+    return
+ } else {
+    message.textContent = "Incorrect!";
+    counter -= 5;
+    idx++;
+    return
   }
-  button.addEventListener("click", function checkAnswer(){
-    var userAnswer = button.nextElementSibling.textContent;
-    if(quiz[idx].answer = userAnswer){
-      Score++
-    } else {
-      //TODO: Reduce 10 seconds
-    }
-  } ) //TODO: How the does it cycle between questions
+  populateQA();
 }
 
 //TODO: Create a high score page and save user score and initials to local storage
@@ -96,10 +100,8 @@ function populateQA(idx){
 
 //TODO: Make it pretty
 
-// for console logging
-// function logIt(){
-//   console.log("click");
-// }
-
 //Starts everything by clicking "Start Quiz"
 start.addEventListener("click", startQuiz);
+
+//Checks the answers when a user clicks an answer
+ulTag.addEventListener("click", checkAnswer)
