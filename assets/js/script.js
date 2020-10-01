@@ -10,6 +10,7 @@ var button = document.querySelector(".button")
 var score = 0;
 var message = document.querySelector(".message")
 var progress = document.querySelector(".score-tracker")
+var finalScore = document.querySelector(".score-final")
 var displayResultsName = document.querySelector("#name")
 var displayResultsScore = document.querySelector("#score")
 var letter = ["A", "B", "C", "D"];
@@ -55,21 +56,22 @@ function startCountdown(){
 
     if (counter === 0) {
       clearInterval(countdown);
+      endQuiz();
     }
   }, 1000)
 }
 
+//Populates the questions
 function populateQuestion(){
   if(idx<quiz.length) {
     questionDisplay.textContent = "Question: " + quiz[idx].question;
     populateChoices(idx);
   } else {
-    quizBody.style.display = "none";
-    resultsBody.style.display = "block";
+    endQuiz();
   }
 }
 
-//Choices populating
+//Populates the choices
 function populateChoices(idx){
   for (var i=0; i < quiz[idx].choices.length; i++){
     if(ulTag.childElementCount < quiz[idx].choices.length){
@@ -77,6 +79,7 @@ function populateChoices(idx){
     ulTag.appendChild(newButton);
     newButton.textContent = letter[i] + " " + quiz[idx].choices[i];
     newButton.setAttribute("class", "button" + [i]);
+    newButton.setAttribute("id", "choice-button")
     newButton.setAttribute("data-answer", quiz[idx].choices[i]);
     } else {
     var existingButton = document.querySelector(".button" + [i]);
@@ -106,6 +109,13 @@ function checkAnswer(e){
   }
 }
 
+function endQuiz(){
+  finalScore.textContent = score;
+  quizBody.style.display = "none";
+  resultsBody.style.display = "block";
+  clearInterval(countdown);
+}
+//Submits a score
 function submitScore(){
   displayResultsScore.textContent = score;
   displayResultsName.textContent = userName;

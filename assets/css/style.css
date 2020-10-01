@@ -23,3 +23,19 @@ div.results {
   height: 50px;
   width: 100px;
 }
+
+#exampleInputEmail1{
+  display:block;
+  margin: 0 auto;
+}
+
+#exampleInputEmail1{
+  display:block;
+  margin: 0 auto;
+}
+
+#choice-button{
+  display:block;
+  margin: 0 auto;
+  text-align: center;
+}
