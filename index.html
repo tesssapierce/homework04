@@ -49,14 +49,33 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h2>Results</h2>
+          <h2>Leader Board</h2>
         </div>
         <div class="row">
-          <div class="col-6" id="name">
-            <!-- insert form here -->
+          <div class="col-6">
+            <h3>Name</h3>
+            <ul id=#name></ul>
           </div>
-          <div class="col-6" id="score"></div>
+          <div class="col-6"></div>
+            <h3>Score</h3>
+            <ul id="score"></ul>
+          </div>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-12 form-section">
+          <h2>Submit your score!</h2>
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Name</label>
+              <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div>
+              <label for="exampleInputEmail1">Score</label>
+              <p id="score"></p>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+          </form>
         </div>
       </div>
     </div>

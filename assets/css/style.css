@@ -4,6 +4,7 @@ div.quiz {
 
 body {
   background-color: aquamarine;
+  text-align: center;
 }
 
 ul.answers {
@@ -12,4 +13,13 @@ ul.answers {
 
 div.results {
   display: none;
+}
+
+.results {
+  text-align: center;
+}
+
+.form-control{
+  height: 50px;
+  width: 100px;
 }

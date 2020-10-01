@@ -13,6 +13,8 @@ var progress = document.querySelector(".score-tracker")
 var displayResultsName = document.querySelector("#name")
 var displayResultsScore = document.querySelector("#score")
 var letter = ["A", "B", "C", "D"];
+var submitButton = document.getElementById("submitButton")
+var resultsBody = document.querySelector(".results")
 
 var quiz = [
   {
@@ -58,8 +60,13 @@ function startCountdown(){
 }
 
 function populateQuestion(){
-  questionDisplay.textContent = "Question: " + quiz[idx].question;
-  populateChoices(idx);
+  if(idx<quiz.length) {
+    questionDisplay.textContent = "Question: " + quiz[idx].question;
+    populateChoices(idx);
+  } else {
+    quizBody.style.display = "none";
+    resultsBody.style.display = "block";
+  }
 }
 
 //Choices populating
@@ -99,11 +106,14 @@ function checkAnswer(e){
   }
 }
 
-function score(){
+function submitScore(){
   displayResultsScore.textContent = score;
   displayResultsName.textContent = userName;
   //Create var = userName and set it to whatever the user puts in the form, form will be in HTML
 }
+
+
+//TODO: What happens when the user completes all of the questions
 
 //TODO: Create a high score page and save user score and initials to local storage
 
@@ -114,6 +124,8 @@ start.addEventListener("click", startQuiz);
 
 //Checks the answers when a user clicks an answer
 ulTag.addEventListener("click", checkAnswer)
+
+submitButton.addEventListener("click", submitScore);
 
 
     //If we want to have an LI tag AND a button, we can use this:
