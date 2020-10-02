@@ -92,7 +92,7 @@ function populateChoices(idx){
     var newButton = document.createElement("button");
     ulTagAnswers.appendChild(newButton);
     newButton.textContent = letter[i] + " " + quiz[idx].choices[i];
-    newButton.setAttribute("class", "button" + [i]);
+    newButton.setAttribute("class", "btn-primary button" + [i]);
     newButton.setAttribute("id", "choice-button")
     newButton.setAttribute("data-answer", quiz[idx].choices[i]);
     } else {

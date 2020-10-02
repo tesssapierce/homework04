@@ -22,7 +22,7 @@
   <div class="container" id="start">
     <div class="row">
       <div class="col-12">
-        <button id="startButton">Start Quiz</button>
+        <button id="startButton" class="btn-primary">Start Quiz</button>
       </div>
     </div>
   </div>
@@ -48,32 +48,34 @@
   <div class="results">
     <div class="container">
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 main">
           <h2>Leader Board</h2>
         </div>
-        <div class="row">
-          <div class="col-6">
+        <div class="row results-display">
+          <div class="col-6 half">
             <h3>Name</h3>
             <ul id="name"></ul>
           </div>
-          <div class="col-6">
+          <div class="col-6 half">
             <h3>Score</h3>
             <ul id="score"></ul>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 main">
           <h2>Submit your score!</h2>
-          <form>
-            <div class="form-group">
-              <label>Name</label>
-              <input type="text" class="form-control" id="data-name-entry">
-              <label>Score</label>
-              <p class="score-final"></p>
-            </div>
-            <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
-          </form>
+          <div id="form-style">
+            <form>
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" id="data-name-entry">
+                <label>Score</label>
+                <p class="score-final"></p>
+              </div>
+              <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

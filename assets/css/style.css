@@ -3,8 +3,9 @@ div.quiz {
 }
 
 body {
-  background-color: aquamarine;
+  background-color: #72A1B5;
   text-align: center;
+  color: #223036
 }
 
 ul {
@@ -22,6 +23,7 @@ div.results {
 .form-control{
   height: 50px;
   width: 100px;
+  margin: 0 auto;
 }
 
 #exampleInputEmail1{
@@ -36,8 +38,21 @@ div.results {
 
 #choice-button{
   display:block;
-  margin: 0 auto;
   text-align: center;
   padding: 5px;
   margin: 10px auto;
+}
+
+.form-style {
+  margin-left: 200px;
+}
+
+.results-display {
+  margin-left: 450px;
+}
+
+button.btn-primary {
+  background-color: #4A6875;
+  color: #ffffff;
+  border-color: #4A6875;
 }
