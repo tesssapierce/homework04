@@ -4,18 +4,20 @@ var quizBody = document.body.querySelector(".quiz");
 var counter = 60;
 var displayCount = document.querySelector(".countdown");
 var questionDisplay = document.querySelector(".question");
-var ulTag = document.querySelector(".answers");
+var ulTagAnswers = document.querySelector(".answers");
 var idx = 0;
 var button = document.querySelector(".button")
 var score = 0;
 var message = document.querySelector(".message")
 var progress = document.querySelector(".score-tracker")
 var finalScore = document.querySelector(".score-final")
+var enterName = document.querySelector("#data-name-entry")
 var displayResultsName = document.querySelector("#name")
 var displayResultsScore = document.querySelector("#score")
 var letter = ["A", "B", "C", "D"];
 var submitButton = document.getElementById("submitButton")
 var resultsBody = document.querySelector(".results")
+var countdown;
 
 var quiz = [
   {
@@ -36,6 +38,18 @@ var quiz = [
     answer: "Cascading Style Sheets"
   }
 ];
+
+var leaderBoard = [
+  {
+    name: "Tessa",
+    score: 500
+  }
+]
+
+var leaderBoardStorage = localStorage.getItem("leaderBoard");
+if (leaderBoardStorage !== null){
+  leaderBoard = JSON.parse(leaderBoardStorage);
+}
 
 //Start Timer and unhide quiz
 function startQuiz(e){
@@ -74,9 +88,9 @@ function populateQuestion(){
 //Populates the choices
 function populateChoices(idx){
   for (var i=0; i < quiz[idx].choices.length; i++){
-    if(ulTag.childElementCount < quiz[idx].choices.length){
+    if(ulTagAnswers.childElementCount < quiz[idx].choices.length){
     var newButton = document.createElement("button");
-    ulTag.appendChild(newButton);
+    ulTagAnswers.appendChild(newButton);
     newButton.textContent = letter[i] + " " + quiz[idx].choices[i];
     newButton.setAttribute("class", "button" + [i]);
     newButton.setAttribute("id", "choice-button")
@@ -109,36 +123,52 @@ function checkAnswer(e){
   }
 }
 
+//Ends the quiz and moves to the results page
 function endQuiz(){
   finalScore.textContent = score;
   quizBody.style.display = "none";
   resultsBody.style.display = "block";
-  clearInterval(countdown);
+  createLeaderBoard();
 }
+
+//Populates current leaderboard
+function createLeaderBoard(){
+  displayResultsName.innerHTML = "";
+  displayResultsScore.innerHTML = "";
+  for (i=0; i<leaderBoard.length; i++){
+    var newLeaderName = document.createElement("li");
+    displayResultsName.appendChild(newLeaderName);
+    newLeaderName.textContent = leaderBoard[i].name;
+
+    var newLeaderScore = document.createElement("li");
+    displayResultsScore.appendChild(newLeaderScore);
+    newLeaderScore.textContent = leaderBoard[i].score;    
+  }
+}
+
 //Submits a score
-function submitScore(){
-  displayResultsScore.textContent = score;
-  displayResultsName.textContent = userName;
-  //Create var = userName and set it to whatever the user puts in the form, form will be in HTML
+function submitScore(e){
+  e.preventDefault();
+  var name = enterName.value.trim();
+  var newLeaderEntry = {name, score}
+  if(name.length){
+    leaderBoard.push(newLeaderEntry);
+    saveToLocalStorage(newLeaderEntry);
+  } else {
+    alert("Please enter a name")
+  }
+  enterName.value = "";
+  createLeaderBoard();
 }
 
-
-//TODO: What happens when the user completes all of the questions
-
-//TODO: Create a high score page and save user score and initials to local storage
-
-//TODO: Make it pretty
+function saveToLocalStorage(){
+  localStorage.setItem("leaderBoard", JSON.stringify(leaderBoard));
+}
 
 //Starts everything by clicking "Start Quiz"
 start.addEventListener("click", startQuiz);
 
 //Checks the answers when a user clicks an answer
-ulTag.addEventListener("click", checkAnswer)
+ulTagAnswers.addEventListener("click", checkAnswer)
 
 submitButton.addEventListener("click", submitScore);
-
-
-    //If we want to have an LI tag AND a button, we can use this:
-    // var answer = document.createElement("li");
-    // answer.textContent = quiz[idx].choices[i];
-    // ulTag.appendChild(answer);

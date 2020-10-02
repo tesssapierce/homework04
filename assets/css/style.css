@@ -7,7 +7,7 @@ body {
   text-align: center;
 }
 
-ul.answers {
+ul {
   list-style-type: none;
 }
 
@@ -38,4 +38,6 @@ div.results {
   display:block;
   margin: 0 auto;
   text-align: center;
+  padding: 5px;
+  margin: 10px auto;
 }
