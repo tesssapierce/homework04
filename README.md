@@ -1,8 +1,6 @@
 # homework04
 ## 04 Web APIs: Code Quiz
 
-As you proceed in your career as a web developer, you will probably be asked to complete a coding assessment, which is typically a combination of multiple-choice questions and interactive challenges. Build a timed code quiz with multiple-choice questions. This app will run in the browser and feature dynamically updated HTML and CSS powered by your JavaScript code. It will also feature a clean and polished user interface and be responsive, ensuring that it adapts to multiple screen sizes.
-
 ## User Story
 
 ```
@@ -27,17 +25,29 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
-The following animation demonstrates the application functionality:
-
-![code quiz](./Assets/04-web-apis-homework-demo.gif)
-
 ### Review
 
-You are required to submit the following for review:
+GitHub URL: https://github.com/tesssapierce/homework04
 
-* The URL of the functional, deployed application.
+GitPage URL: https://tesssapierce.github.io/homework04/
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
 
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+## How to use
+
+```
+Press the "Start Quiz" button to begin the quiz.
+You will have 60 seconds to answer 4 questions, if the timer runs out, the quiz will end.
+Each question has 4 choices and will display if you got the answer correct at the bottom of the page.
+Each user can get a score of 0-4 and add their name to the leaderboard.
+The leaderboard will contain any local storage that the user has from previous attemps.
+You can restart the quiz by clicking the "restart" button at the end of the quiz, which will reload the page.
+Good luck beating my high score of 500!
+```
+
+## Screenshots
+
+The quiz will display one question at a time with its choices
+![quiz display](./assets/images/quizDisplay.png)
+
+The leaderboard will display high scores and allow the user to restart the quiz
+![!leaderboard display](./assets/images/leaderBoard.png)

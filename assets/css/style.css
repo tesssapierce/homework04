@@ -56,3 +56,7 @@ button.btn-primary {
   color: #ffffff;
   border-color: #4A6875;
 }
+
+.restart {
+  margin: 10px;
+}

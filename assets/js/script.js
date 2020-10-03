@@ -6,19 +6,21 @@ var displayCount = document.querySelector(".countdown");
 var questionDisplay = document.querySelector(".question");
 var ulTagAnswers = document.querySelector(".answers");
 var idx = 0;
-var button = document.querySelector(".button")
+var button = document.querySelector(".button");
 var score = 0;
-var message = document.querySelector(".message")
-var progress = document.querySelector(".score-tracker")
-var finalScore = document.querySelector(".score-final")
-var enterName = document.querySelector("#data-name-entry")
-var displayResultsName = document.querySelector("#name")
-var displayResultsScore = document.querySelector("#score")
+var message = document.querySelector(".message");
+var progress = document.querySelector(".score-tracker");
+var finalScore = document.querySelector(".score-final");
+var enterName = document.querySelector("#data-name-entry");
+var displayResultsName = document.querySelector("#name");
+var displayResultsScore = document.querySelector("#score");
 var letter = ["A", "B", "C", "D"];
-var submitButton = document.getElementById("submitButton")
-var resultsBody = document.querySelector(".results")
+var submitButton = document.getElementById("submitButton");
+var resultsBody = document.querySelector(".results");
 var countdown;
+var restartButton = document.querySelector(".restart");
 
+//Quiz questions, choices, and answer
 var quiz = [
   {
     question: "The # symbol specifies that the selector is...", 
@@ -39,6 +41,7 @@ var quiz = [
   }
 ];
 
+//Preset leaderboard data
 var leaderBoard = [
   {
     name: "Tessa",
@@ -46,6 +49,7 @@ var leaderBoard = [
   }
 ]
 
+//If there is local storage data, updates the Leaderboard array
 var leaderBoardStorage = localStorage.getItem("leaderBoard");
 if (leaderBoardStorage !== null){
   leaderBoard = JSON.parse(leaderBoardStorage);
@@ -66,7 +70,7 @@ function startCountdown(){
     counter--;
 
     //Display text on webpage
-    displayCount.textContent = counter + " seconds left"
+    displayCount.textContent = counter + " seconds left";
 
     if (counter === 0) {
       clearInterval(countdown);
@@ -150,7 +154,7 @@ function createLeaderBoard(){
 function submitScore(e){
   e.preventDefault();
   var name = enterName.value.trim();
-  var newLeaderEntry = {name, score}
+  var newLeaderEntry = {name, score};
   if(name.length){
     leaderBoard.push(newLeaderEntry);
     saveToLocalStorage(newLeaderEntry);
@@ -161,14 +165,24 @@ function submitScore(e){
   createLeaderBoard();
 }
 
+//Saves leader information to local storage
 function saveToLocalStorage(){
   localStorage.setItem("leaderBoard", JSON.stringify(leaderBoard));
+}
+
+//Restarts the quiz for user to have another attempt
+function restartPage(){
+  location.reload();
 }
 
 //Starts everything by clicking "Start Quiz"
 start.addEventListener("click", startQuiz);
 
 //Checks the answers when a user clicks an answer
-ulTagAnswers.addEventListener("click", checkAnswer)
+ulTagAnswers.addEventListener("click", checkAnswer);
 
+//Adds the score to the leaderboard and local storage if "Submit" is clicked
 submitButton.addEventListener("click", submitScore);
+
+//Restarts the page if "Restart" is clicked
+restartButton.addEventListener("click", restartPage);
